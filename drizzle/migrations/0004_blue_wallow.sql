@@ -1,0 +1,1 @@
+ALTER TABLE `assets` ADD `parent_asset_id` text;

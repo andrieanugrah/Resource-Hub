@@ -1,0 +1,27 @@
+# deps / build
+node_modules/
+.next/
+out/
+dist/
+*.tsbuildinfo
+
+# env / secrets
+.env
+.env.*
+!.env.example
+
+# runtime data (sessions, password hashes, tokens)
+data/
+
+# uploaded assets (keep directory via .gitkeep)
+public/uploads/
+
+# logs / OS
+*.log
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp

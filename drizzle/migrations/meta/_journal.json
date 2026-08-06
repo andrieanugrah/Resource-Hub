@@ -1,0 +1,41 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1785383280966,
+      "tag": "0000_confused_master_chief",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1785428279513,
+      "tag": "0001_lowly_argent",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1785428681280,
+      "tag": "0002_modern_firebird",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1785653537258,
+      "tag": "0003_skinny_the_hand",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1785653550391,
+      "tag": "0004_blue_wallow",
+      "breakpoints": true
+    }
+  ]
+}
