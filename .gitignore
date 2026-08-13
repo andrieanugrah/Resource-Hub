@@ -5,10 +5,12 @@ out/
 dist/
 *.tsbuildinfo
 
-# env / secrets
+# env / secrets / cookies
 .env
 .env.*
 !.env.example
+.cookies.txt
+*.cookies.txt
 
 # runtime data (sessions, password hashes, tokens)
 data/
@@ -18,10 +20,19 @@ public/uploads/
 
 # logs / OS
 *.log
+.devlog.txt
+*.devlog.txt
 .DS_Store
 Thumbs.db
 
-# IDE
+# debug / test scripts & screenshots
+.shots/
+.debug.cjs
+.drive*.cjs
+.verify.cjs
+
+# IDE / AI tools
 .idea/
 .vscode/
 *.swp
+.claude/
