@@ -55,7 +55,3 @@ IDs via `newId("prefix")` — returns `prefix_timestamp+random`. Timestamps via 
 - `app/` — public routes (`/login`, `/`, `/reset-password`). Root page (`/`) checks auth → redirects to `/dashboard` or `/login`.
 - `app/api/` — Route Handlers with `requireApiUser()` / `can(role, action)` / `writeAudit()` / `validateBody()`.
 
-## References
-
-- `docs/SECURITY-AUDIT.md` — findings from 2026-07-28 audit (fixed: token leak, meta endpoint creds, timing-safe compare, logout session cleanup).
-- `CLAUSE.md` — upstream product doc (may be stale on stack details).

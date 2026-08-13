@@ -131,11 +131,6 @@ Centralize transitions. Reject illegal with 409.
 
 REST. Resource-oriented. Action endpoints under resource (`POST /assets/:id/assign`, `POST /requests/:id/approve`). Consistent error envelope. IDOR guarded on every detail endpoint.
 
-## References
-
-- `docs/SECURITY-AUDIT.md` — findings from 2026-07-28 audit (fixed: token leak, meta endpoint creds, timing-safe compare, logout session cleanup).
-- `audit_report.md` — additional audit report.
-
 ## When Adding to This File
 
 Update commands section when toolchain changes. Update data-model section only when PRD diverges from code (cite PRD section). Don't restate PRD content — cite the section (`PRD §X`) instead.
