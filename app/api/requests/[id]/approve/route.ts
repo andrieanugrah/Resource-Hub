@@ -8,8 +8,10 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     toStatus: "approved",
     permission: "request.approve",
     actionType: "request.approve",
-    validate: (request, user) =>
-      request.requester_id === user.id ? "Cannot approve own request." : null,
+    validate: (request, user) => {
+      if (request.requester_id === user.id) return "Cannot approve own request.";
+      return null;
+    },
     mutate: (request, user) => {
       request.approved_by = user.id;
       request.approved_at = nowIso();
@@ -20,3 +22,4 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     },
   });
 }
+

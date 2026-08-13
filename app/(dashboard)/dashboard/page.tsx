@@ -7,7 +7,7 @@ import { readTable } from "@/lib/db";
 import DashboardCharts from "@/components/dashboard-charts";
 import { AnimatedKpiCards } from "@/components/animated-kpi-cards";
 import { AnimatedDepartmentBars } from "@/components/animated-department-bars";
-import { checkWarrantyExpirationNotifications } from "@/lib/notifications";
+import { checkWarrantyExpirationNotifications, checkExpiredReservations } from "@/lib/notifications";
 import Link from "next/link";
 import { Package2, CheckCircle2, UserCheck, Wrench, ClipboardList, ShieldAlert, TrendingUp, Building2 } from "lucide-react";
 
@@ -23,6 +23,7 @@ const cardConfigs = [
 export default async function DashboardPage() {
   const user = await requireUser();
   void checkWarrantyExpirationNotifications();
+  void checkExpiredReservations();
   const [assets, requests, users, departments, txs] = await Promise.all([
     readTable("assets"), readTable("requests"), readTable("users"),
     readTable("departments"), readTable("asset_transactions"),

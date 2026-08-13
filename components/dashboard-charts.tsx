@@ -2,6 +2,7 @@
 import { readTable } from "@/lib/db";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Wrench, BarChart3 } from "lucide-react";
+import Link from "next/link";
 
 function statusColor(s: string): string {
   const m: Record<string, string> = {
@@ -69,11 +70,15 @@ async function StatusPieChart() {
       </div>
       <div className="mt-4 flex flex-wrap justify-center gap-3">
         {entries.map(([status, count]) => (
-          <div key={status} className="flex items-center gap-1.5 text-xs">
+          <Link
+            key={status}
+            href={`/assets?status=${status}`}
+            className="flex items-center gap-1.5 text-xs rounded-full px-2 py-1 transition-colors hover:bg-muted/60"
+          >
             <span className="h-2 w-2 rounded-full" style={{ background: statusColor(status) }} />
             <span className="text-muted-foreground">{statusLabel(status)}</span>
             <span className="font-medium text-foreground">{count}</span>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

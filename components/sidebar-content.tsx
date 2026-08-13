@@ -38,7 +38,7 @@ const navSections: NavSection[] = [
     title: "Inventory",
     items: [
       { href: "/assets", label: "Assets", icon: Package },
-      { href: "/assets/new", label: "New Asset", icon: Plus },
+      { href: "/assets/new", label: "New Asset", icon: Plus, perm: "asset.create" },
       { href: "/scan", label: "Scan QR", icon: ScanLine },
       { href: "/categories", label: "Categories", icon: Tags, perm: "master.manage" },
       { href: "/locations", label: "Locations", icon: MapPin, perm: "master.manage" },
@@ -50,7 +50,7 @@ const navSections: NavSection[] = [
     items: [
       { href: "/requests", label: "Requests", icon: FileText },
       { href: "/approvals", label: "Approvals", icon: CheckCircle, perm: "request.approve" },
-      { href: "/maintenance", label: "Maintenance", icon: Wrench, perm: "maintenance.create" },
+      { href: "/maintenance", label: "Maintenance", icon: Wrench, perm: "maintenance.view" },
     ],
   },
   {

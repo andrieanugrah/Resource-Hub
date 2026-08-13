@@ -36,7 +36,9 @@ function seed() {
 
   const sqlFiles = fs.readdirSync(migrationsDir).filter((f) => f.endsWith(".sql")).sort();
   for (const file of sqlFiles) {
-    db.exec(fs.readFileSync(path.join(migrationsDir, file), "utf8"));
+    try {
+      db.exec(fs.readFileSync(path.join(migrationsDir, file), "utf8"));
+    } catch (_) {}
   }
 
   const t = now;
@@ -47,21 +49,21 @@ function seed() {
   const empHash = hash("password");
 
   const userNames = [
-    "Super Admin", "IT Admin", "Rina Wijaya", "Budi Santoso", "Dewi Lestari", "Alex Chandra",
-    "Andi Pratama", "Siti Nurhaliza", "Rudi Hartono", "Maya Dewi", "Dika Saputra",
-    "Putri Anggraini", "Hendra Gunawan", "Ratna Sari", "Irfan Hakim", "Dewa Putra",
-    "Lina Marlina", "Fajar Nugroho", "Fitri Handayani", "Bayu Kusuma",
+    "Super Admin", "IT Admin", "Rina Wijaya", "Budi Santoso", "Auditor Internal", "Procurement Officer",
+    "Dewi Lestari", "Alex Chandra", "Andi Pratama", "Siti Nurhaliza", "Rudi Hartono", "Maya Dewi",
+    "Dika Saputra", "Putri Anggraini", "Hendra Gunawan", "Ratna Sari", "Irfan Hakim", "Dewa Putra",
+    "Lina Marlina", "Fajar Nugroho",
   ];
   const userEmails = [
     "superadmin@example.com", "admin@example.com", "manager@example.com",
-    "employee@example.com", "dewi@example.com", "alex@example.com",
-    "andi@example.com", "siti@example.com", "rudi@example.com", "maya@example.com",
-    "dika@example.com", "putri@example.com", "hendra@example.com", "ratna@example.com",
-    "irfan@example.com", "dewa@example.com", "lina@example.com", "fajar@example.com",
-    "fitri@example.com", "bayu@example.com",
+    "employee@example.com", "auditor@example.com", "procurement@example.com",
+    "dewi@example.com", "alex@example.com", "andi@example.com", "siti@example.com",
+    "rudi@example.com", "maya@example.com", "dika@example.com", "putri@example.com",
+    "hendra@example.com", "ratna@example.com", "irfan@example.com", "dewa@example.com",
+    "lina@example.com", "fajar@example.com",
   ];
   const userRoles = [
-    "super_admin", "admin_it", "manager", "employee", "employee", "employee",
+    "super_admin", "admin_it", "manager", "employee", "auditor", "procurement",
     "employee", "employee", "employee", "employee", "employee",
     "employee", "employee", "employee", "employee", "employee",
     "employee", "employee", "employee", "employee",
@@ -82,8 +84,8 @@ function seed() {
   const insertUser = db.prepare(`INSERT OR REPLACE INTO users (id, name, email, password_hash, password_salt, role, department_id, job_title, status, last_login_at, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`);
   const users = [];
   for (let i = 0; i < 20; i++) {
-    const h = i < 6 ? [saHash, admHash, mgrHash, empHash, empHash, empHash][i] : empHash;
-    const id = i < 6 ? `usr_${["superadmin","admin","manager","employee","emp2","emp3"][i]}` : genId("usr");
+    const h = empHash;
+    const id = i < 6 ? `usr_${["superadmin","admin","manager","employee","auditor","procurement"][i]}` : genId("usr");
     users.push({ id, email: userEmails[i], role: userRoles[i], department_id: userDepts[i] });
     insertUser.run(id, userNames[i], userEmails[i], h.hash, h.salt, userRoles[i], userDepts[i], userJobs[i], "active", i < 2 ? t() : null, t(), t());
   }

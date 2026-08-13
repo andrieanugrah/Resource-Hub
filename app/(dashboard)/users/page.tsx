@@ -19,20 +19,16 @@ import { motion } from "motion/react";
 import { useToast } from "@/components/ui/toast";
 import { useConfirm } from "@/components/ui/confirm-dialog";
 import { OpenSplitButton } from "@/components/open-split-button";
+import { ROLE_LABELS } from "@/lib/permissions";
 import type { User, Department, Role } from "@/lib/db";
-
-const ROLE_LABELS: Record<Role, string> = {
-  super_admin: "Super Admin",
-  admin_it: "IT Admin",
-  manager: "Manager",
-  employee: "Employee",
-};
 
 const ROLE_AVATAR_COLORS: Record<Role, string> = {
   super_admin: "bg-violet-500/15 text-violet-700 border-violet-500/20",
   admin_it: "bg-blue-500/15 text-blue-700 border-blue-500/20",
   manager: "bg-amber-500/15 text-amber-700 border-amber-500/20",
   employee: "bg-emerald-500/15 text-emerald-700 border-emerald-500/20",
+  auditor: "bg-rose-500/15 text-rose-700 border-rose-500/20",
+  procurement: "bg-teal-500/15 text-teal-700 border-teal-500/20",
 };
 
 function getInitials(name: string): string {

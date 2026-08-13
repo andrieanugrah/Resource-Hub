@@ -75,6 +75,18 @@ export async function handleRequestTransition(
     );
   }
 
+  // High-value asset approval guard: Manager cannot approve assets >= Rp 10,000,000 without Super Admin
+  if (transition.toStatus === "approved" && user.role === "manager" && request.asset_id) {
+    const assets = await readTable("assets");
+    const targetAsset = assets.find((a) => a.id === request.asset_id);
+    if (targetAsset?.purchase_price && targetAsset.purchase_price >= 10000000) {
+      return NextResponse.json(
+        { error: "Request aset berharga tinggi (≥ Rp 10.000.000) memerlukan persetujuan dari Super Admin." },
+        { status: 403 },
+      );
+    }
+  }
+
   // Custom validation
   if (transition.validate) {
     const err = transition.validate(request, user, body);
@@ -157,6 +169,16 @@ export async function handleRequestTransition(
         asset.updated_by = user.id;
         asset.updated_at = now;
         transactionType = "return";
+
+        // Cascading release of license assignments for returned asset/user
+        const licAssignments = await readTable("license_assignments");
+        const updatedAssignments = licAssignments.filter((la) =>
+          la.assigned_asset_id !== asset.id && (oldUser ? la.assigned_user_id !== oldUser : true)
+        );
+        if (updatedAssignments.length !== licAssignments.length) {
+          await writeTable("license_assignments", updatedAssignments);
+          revalidatePath("/licenses");
+        }
       } else if (
         request.request_type === "new_asset" ||
         request.request_type === "replacement" ||

@@ -94,3 +94,68 @@ export async function checkWarrantyExpirationNotifications(): Promise<void> {
     }
   }
 }
+
+export async function checkExpiredReservations(): Promise<void> {
+  const [assets, requests, users] = await Promise.all([
+    readTable("assets"),
+    readTable("requests"),
+    readTable("users"),
+  ]);
+
+  const liveAssets = assets.filter((a) => !a.deleted_at && a.status === "reserved");
+  if (liveAssets.length === 0) return;
+
+  const now = new Date();
+  const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
+
+  let assetsUpdated = false;
+  let requestsUpdated = false;
+
+  for (const asset of liveAssets) {
+    const linkedReq = requests.find(
+      (r) => r.asset_id === asset.id && r.status === "approved"
+    );
+    if (!linkedReq) continue;
+
+    const approvalTime = linkedReq.approved_at
+      ? new Date(linkedReq.approved_at).getTime()
+      : new Date(linkedReq.updated_at).getTime();
+
+    if (now.getTime() - approvalTime > SEVEN_DAYS_MS) {
+      // Revert asset to available
+      asset.status = "available";
+      asset.updated_at = nowIso();
+      assetsUpdated = true;
+
+      // Cancel request
+      linkedReq.status = "cancelled";
+      linkedReq.rejected_reason = "Reservasi dibatalkan otomatis karena melebihi batas waktu 7 hari.";
+      linkedReq.updated_at = nowIso();
+      requestsUpdated = true;
+
+      // Notify requester
+      await createNotification({
+        userId: linkedReq.requester_id,
+        title: "Reservasi Aset Kadaluarsa",
+        message: `Reservasi aset ${asset.asset_name} (${asset.asset_code}) dibatalkan otomatis karena tidak diambil dalam 7 hari.`,
+        type: "asset",
+        link: `/requests/${linkedReq.id}`,
+      });
+
+      // Notify IT Admins
+      const admins = users.filter((u) => u.role === "super_admin" || u.role === "admin_it");
+      for (const admin of admins) {
+        await createNotification({
+          userId: admin.id,
+          title: "Reservasi Aset Kadaluarsa",
+          message: `Aset ${asset.asset_name} (${asset.asset_code}) telah dikembalikan ke status Available (Request ${linkedReq.request_code} expired).`,
+          type: "asset",
+          link: `/assets/${asset.id}`,
+        });
+      }
+    }
+  }
+
+  if (assetsUpdated) await writeTable("assets", assets);
+  if (requestsUpdated) await writeTable("requests", requests);
+}

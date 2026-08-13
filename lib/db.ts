@@ -1,8 +1,8 @@
-import { eq, inArray } from "drizzle-orm";
+import { eq, inArray, and, like, isNull, desc } from "drizzle-orm";
 import type { SQLiteTable, SQLiteColumn } from "drizzle-orm/sqlite-core";
 import { db, schema } from "@/drizzle/db";
 
-export type Role = "super_admin" | "admin_it" | "manager" | "employee";
+export type Role = "super_admin" | "admin_it" | "manager" | "employee" | "auditor" | "procurement";
 export type AssetStatus =
   | "available" | "assigned" | "reserved" | "in_repair" | "retired" | "lost" | "disposed";
 export type AssetCondition = "new" | "good" | "fair" | "damaged" | "critical";
@@ -418,3 +418,44 @@ export function computeDepreciation(asset: Asset, asOf: Date = new Date()): {
 
   return result;
 }
+
+export async function getPaginatedAssets(params: {
+  page?: number;
+  limit?: number;
+  status?: string;
+  categoryId?: string;
+  search?: string;
+}): Promise<{ data: Asset[]; total: number; page: number; totalPages: number }> {
+  const page = Math.max(1, params.page ?? 1);
+  const limit = Math.max(1, Math.min(100, params.limit ?? 20));
+  const offset = (page - 1) * limit;
+
+  const conditions = [isNull(schema.assets.deleted_at)];
+  if (params.status) conditions.push(eq(schema.assets.status, params.status));
+  if (params.categoryId) conditions.push(eq(schema.assets.category_id, params.categoryId));
+  if (params.search) conditions.push(like(schema.assets.asset_name, `%${params.search}%`));
+
+  const whereClause = conditions.length > 1 ? and(...conditions) : conditions[0];
+
+  const rawRows = db
+    .select()
+    .from(schema.assets)
+    .where(whereClause)
+    .orderBy(desc(schema.assets.created_at))
+    .limit(limit)
+    .offset(offset)
+    .all();
+
+  const totalCountRows = db
+    .select()
+    .from(schema.assets)
+    .where(whereClause)
+    .all();
+
+  const data = parseAssets(rawRows);
+  const total = totalCountRows.length;
+  const totalPages = Math.ceil(total / limit) || 1;
+
+  return { data, total, page, totalPages };
+}
+
