@@ -8,6 +8,10 @@ interface LogoProps extends React.SVGProps<SVGSVGElement> {
   className?: string;
 }
 
+/**
+ * Exact RH Monogram + Hexagon Shield Vector Logo
+ * Meticulously matching the ResourceHub Brand Identity Specification
+ */
 export function LogoIcon({
   size = 32,
   theme = "auto",
@@ -15,76 +19,70 @@ export function LogoIcon({
   ...props
 }: React.SVGProps<SVGSVGElement> & { size?: number | string; theme?: "dark" | "light" | "auto" }) {
   const isDark = theme === "dark";
+  const rColor = isDark ? "#FFFFFF" : "#0F172A";
+  const rFacetColor = isDark ? "#E2E8F0" : "#1E293B";
 
   return (
     <svg
       width={size}
       height={size}
-      viewBox="0 0 100 100"
+      viewBox="0 0 100 115"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={`shrink-0 ${className}`}
       {...props}
     >
       <defs>
-        <linearGradient id="rh-orange-grad" x1="45" y1="10" x2="85" y2="90" gradientUnits="userSpaceOnUse">
+        <linearGradient id="rh-h-left" x1="50" y1="10" x2="68" y2="100" gradientUnits="userSpaceOnUse">
           <stop offset="0%" stopColor="#FB923C" />
-          <stop offset="50%" stopColor="#F97316" />
+          <stop offset="100%" stopColor="#F97316" />
+        </linearGradient>
+        <linearGradient id="rh-h-right" x1="68" y1="10" x2="95" y2="100" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#F97316" />
           <stop offset="100%" stopColor="#EA580C" />
-        </linearGradient>
-        <linearGradient id="rh-orange-light" x1="45" y1="15" x2="65" y2="55" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#FDBA74" />
-          <stop offset="100%" stopColor="#FB923C" />
-        </linearGradient>
-        <linearGradient id="rh-orange-dark" x1="65" y1="50" x2="90" y2="90" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#EA580C" />
-          <stop offset="100%" stopColor="#C2410C" />
-        </linearGradient>
-        <linearGradient id="rh-dark-r" x1="10" y1="10" x2="45" y2="90" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#1E293B" />
-          <stop offset="100%" stopColor="#0F172A" />
         </linearGradient>
       </defs>
 
-      {/* Hexagonal Isometric Outline / Silhouette */}
-      <g>
-        {/* === R MONOGRAM (Left Face) === */}
-        {/* Left vertical column of R */}
+      {/* === LEFT HALF: 'R' (Hexagon Left Facet) === */}
+      <g id="rh-monogram-R">
+        {/* R Left Vertical Spine */}
         <path
-          d="M12 24 L30 14 L30 86 L12 96 Z"
-          fill={isDark ? "#FFFFFF" : "url(#rh-dark-r)"}
+          d="M8 30 L26 19 L26 82 L8 93 Z"
+          fill={rColor}
         />
-        {/* Upper loop of R */}
+        {/* R Top Loop Outer */}
         <path
-          d="M30 14 L46 23 L46 50 L30 59 Z"
-          fill={isDark ? "#E2E8F0" : "#334155"}
+          d="M26 19 L46 7 L46 45 L26 57 Z"
+          fill={rFacetColor}
         />
-        {/* Inner hole of R */}
+        {/* R Inner Counter Hole (Negative Space) */}
         <path
-          d="M30 28 L38 32 L38 42 L30 46 Z"
-          fill={isDark ? "#0F172A" : "#FFFFFF"}
+          d="M26 31 L36 25 L36 39 L26 45 Z"
+          fill={isDark ? "#0B1120" : "#FFFFFF"}
         />
-        {/* Diagonal lower leg of R */}
+        {/* R Diagonal Leg (Bottom Right) */}
         <path
-          d="M30 50 L46 59 L46 86 L30 77 Z"
-          fill={isDark ? "#CBD5E1" : "#1E293B"}
+          d="M26 57 L46 45 L46 95 L34 102 L26 82 Z"
+          fill={rColor}
         />
+      </g>
 
-        {/* === H MONOGRAM (Right Face) === */}
-        {/* Left vertical column of H */}
+      {/* === RIGHT HALF: 'H' (Hexagon Right Facet) === */}
+      <g id="rh-monogram-H">
+        {/* H Left Column */}
         <path
-          d="M52 23 L66 15 L66 87 L52 95 Z"
-          fill="url(#rh-orange-light)"
+          d="M54 20 L68 12 L68 98 L54 106 Z"
+          fill="url(#rh-h-left)"
         />
-        {/* Isometric Crossbar of H */}
+        {/* H Isometric Crossbar */}
         <path
-          d="M66 45 L76 39 L76 55 L66 61 Z"
-          fill="url(#rh-orange-grad)"
+          d="M68 47 L80 40 L80 62 L68 69 Z"
+          fill="#F97316"
         />
-        {/* Right vertical column of H */}
+        {/* H Right Column */}
         <path
-          d="M76 15 L90 7 L90 79 L76 87 Z"
-          fill="url(#rh-orange-dark)"
+          d="M80 12 L94 4 L94 82 L80 90 Z"
+          fill="url(#rh-h-right)"
         />
       </g>
     </svg>
@@ -120,16 +118,16 @@ export function Logo({
       : "text-slate-500 dark:text-slate-400";
 
   return (
-    <div className={`inline-flex items-center gap-3 ${className}`}>
+    <div className={`inline-flex items-center gap-3.5 ${className}`}>
       {variant !== "wordmark" && <LogoIcon size={iconSize} theme={theme} {...props} />}
       <div className="flex flex-col leading-none text-left">
-        <div className="flex items-center tracking-tight font-extrabold text-xl">
+        <div className="flex items-center tracking-tight font-black text-2xl">
           <span className={textColor}>Resource</span>
           <span className="text-[#F97316]">Hub</span>
         </div>
         {showSubtitle && (
           <span
-            className={`text-[9px] font-semibold tracking-[0.2em] uppercase mt-1 ${subtextColor}`}
+            className={`text-[10px] font-bold tracking-[0.22em] uppercase mt-1.5 ${subtextColor}`}
           >
             IT ASSET MANAGEMENT
           </span>

@@ -51,7 +51,6 @@ export function LoginForm({
           <form onSubmit={handleSubmit} className="p-6 md:p-8">
             <FieldGroup>
               <div className="flex flex-col items-center gap-2 text-center">
-                <LogoIcon size={42} theme="light" className="mb-1" />
                 <h1 className="text-2xl font-bold">Welcome back</h1>
                 <p className="text-balance text-muted-foreground text-sm">
                   Login to ResourceHub
@@ -99,39 +98,41 @@ export function LoginForm({
               </Field>
             </FieldGroup>
           </form>
-          <div className="relative hidden md:flex flex-col items-center justify-center p-8 bg-slate-900 text-white overflow-hidden">
-            {/* Background grid */}
-            <svg className="absolute inset-0 h-full w-full opacity-20" viewBox="0 0 400 400">
+          <div className="relative hidden md:flex flex-col items-center justify-center p-8 bg-[#0B1120] text-white overflow-hidden">
+            {/* Background radar grid */}
+            <svg className="absolute inset-0 h-full w-full opacity-20 pointer-events-none" viewBox="0 0 400 400">
               <defs>
                 <pattern id="login-grid" width="32" height="32" patternUnits="userSpaceOnUse">
                   <path d="M 32 0 L 0 0 0 32" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-slate-400" />
                 </pattern>
               </defs>
               <rect width="400" height="400" fill="url(#login-grid)" />
-              <circle cx="200" cy="180" r="110" fill="none" stroke="currentColor" strokeWidth="1" className="text-white/10" />
-              <circle cx="200" cy="180" r="75" fill="none" stroke="currentColor" strokeWidth="1" className="text-white/10" />
+              <circle cx="200" cy="180" r="120" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-white/10" />
+              <circle cx="200" cy="180" r="80" fill="none" stroke="currentColor" strokeWidth="1" className="text-white/10" />
               <circle cx="200" cy="180" r="40" fill="none" stroke="currentColor" strokeWidth="1" className="text-orange-500/20" />
+              <rect x="60" y="310" width="280" height="12" rx="6" fill="currentColor" className="text-white/5" />
+              <rect x="100" y="332" width="200" height="8" rx="4" fill="currentColor" className="text-white/5" />
             </svg>
 
-            {/* Glowing ambient dots */}
+            {/* Glowing ambient background */}
             <div className="absolute -top-20 -right-20 w-56 h-56 bg-orange-500/15 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute -bottom-20 -left-20 w-56 h-56 bg-blue-600/15 rounded-full blur-3xl pointer-events-none" />
 
-            <div className="relative flex flex-col items-center text-center z-10 space-y-4">
-              <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 shadow-2xl backdrop-blur-sm">
-                <LogoIcon size={64} theme="dark" />
+            <div className="relative flex flex-col items-center text-center z-10 space-y-3">
+              <LogoIcon size={84} theme="dark" className="drop-shadow-2xl mb-1" />
+              
+              <div className="flex items-center tracking-tight font-black text-2xl leading-none">
+                <span className="text-white">Resource</span>
+                <span className="text-[#F97316]">Hub</span>
               </div>
+              
+              <span className="text-[10px] font-bold tracking-[0.25em] text-slate-400 uppercase">
+                IT ASSET MANAGEMENT
+              </span>
 
-              <div className="flex flex-col items-center">
-                <Logo variant="wordmark" theme="dark" showSubtitle={false} />
-                <span className="text-[10px] font-bold tracking-[0.25em] text-slate-400 uppercase mt-1.5">
-                  IT ASSET MANAGEMENT
-                </span>
-              </div>
-
-              <div className="pt-2 text-xs text-slate-400/80 max-w-[240px] leading-relaxed">
-                Centralized hardware, software license, and lifecycle inventory control.
-              </div>
+              <p className="pt-2 text-xs text-slate-400/80 max-w-[240px] leading-relaxed">
+                Centralized hardware, software license, and lifecycle inventory management.
+              </p>
             </div>
           </div>
         </CardContent>
