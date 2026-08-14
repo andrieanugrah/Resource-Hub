@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "build": "node scripts/init-db.js && next build",
+    "start": "node scripts/init-db.js && next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "seed": "node scripts/seed.js",
