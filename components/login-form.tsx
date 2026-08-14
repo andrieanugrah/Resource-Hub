@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { Loader2 } from "lucide-react";
 import { apiClient } from "@/app/api-client";
 import { Button } from "@/components/ui/button";
@@ -97,25 +98,27 @@ export function LoginForm({
               </Field>
             </FieldGroup>
           </form>
-          <div className="relative hidden md:block bg-linear-to-br from-primary/10 via-primary/5 to-background">
-            <svg className="absolute inset-0 h-full w-full opacity-30" viewBox="0 0 400 400">
-              <defs>
-                <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-primary/20" />
-                </pattern>
-              </defs>
-              <rect width="400" height="400" fill="url(#grid)" />
-              <circle cx="200" cy="160" r="80" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-primary/15" />
-              <circle cx="200" cy="160" r="50" fill="none" stroke="currentColor" strokeWidth="1" className="text-primary/10" />
-              <circle cx="200" cy="160" r="20" fill="currentColor" className="text-primary/10" />
-              <rect x="60" y="260" width="280" height="12" rx="6" fill="currentColor" className="text-primary/10" />
-              <rect x="100" y="285" width="200" height="8" rx="4" fill="currentColor" className="text-primary/6" />
-              <rect x="130" y="305" width="140" height="8" rx="4" fill="currentColor" className="text-primary/6" />
-            </svg>
-            <div className="relative flex flex-col items-center justify-center h-full min-h-[400px] p-8 text-center">
-              <span className="text-5xl font-bold tracking-tight text-primary/25">RH</span>
-              <p className="mt-2 text-sm font-medium text-muted-foreground/60">ResourceHub</p>
-              <p className="mt-1 text-xs text-muted-foreground/40">IT Asset Management</p>
+          <div className="relative hidden md:flex flex-col items-center justify-center p-8 bg-slate-900 text-white overflow-hidden">
+            {/* Ambient decorative grid & circles */}
+            <div className="absolute inset-0 bg-[radial-gradient(#ffffff0a_1px,transparent_1px)] [background-size:16px_16px] opacity-70" />
+            <div className="absolute -top-24 -right-24 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+
+            <div className="relative flex flex-col items-center text-center z-10 space-y-4">
+              <Image
+                src="/logo-dark.png"
+                alt="ResourceHub"
+                width={200}
+                height={60}
+                className="h-12 w-auto object-contain drop-shadow-md"
+                priority
+              />
+              <div className="inline-block px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[11px] font-semibold tracking-[0.2em] text-slate-300 uppercase">
+                IT ASSET MANAGEMENT
+              </div>
+              <p className="text-xs text-slate-400 max-w-[220px] leading-relaxed pt-2">
+                Centralized hardware, software license, and lifecycle inventory control.
+              </p>
             </div>
           </div>
         </CardContent>
