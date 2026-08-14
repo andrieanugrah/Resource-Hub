@@ -23,6 +23,7 @@ npm run lint          # eslint .
 npm run typecheck     # tsc --noEmit
 npm run test          # vitest run (tests/**/*.test.ts)
 npm run test:watch    # vitest
+npx vitest run tests/password.test.ts   # single test file
 npm run seed          # node scripts/seed.js  (reset DB, migrate, seed demo)
 npm run db:generate   # drizzle-kit generate --config drizzle.config.ts
 npm run db:migrate    # node scripts/migrate.mjs
@@ -31,7 +32,7 @@ npm run db:push       # drizzle-kit push (skip migration files)
 
 CI gate: `npm run lint && npm run typecheck && npm run test`.
 
-Demo login: `admin@example.com` / `password`.
+Demo login: `admin@example.com` / `password`. Also `superadmin@`, `manager@`, `employee@`, `auditor@`, `procurement@example.com` (all / `password`).
 
 ## Architecture
 
@@ -90,7 +91,7 @@ IDs via `newId("prefix")` — returns `prefix_timestamp+random`. Timestamps via 
 
 ### RBAC
 
-Four roles: `super_admin`, `admin_it`, `manager`, `employee`. Matrix in `lib/permissions.ts` — `can(role, action)` returns boolean. Server enforces on every protected action; UI hides forbidden controls.
+Six roles: `super_admin`, `admin_it`, `manager`, `employee`, `auditor`, `procurement`. Matrix in `lib/permissions.ts` — `can(role, action)` returns boolean. Server enforces on every protected action; UI hides forbidden controls. `auditor` = read-only (audit logs, reports, depreciation); `procurement` = asset registration + procurement reports.
 
 ### Domain Modules (PRD §7)
 
