@@ -3,8 +3,8 @@
 import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { Logo, LogoIcon } from "@/components/logo";
 import { apiClient } from "@/app/api-client";
 import {
   LayoutDashboard, Package, Tags, MapPin, Key,
@@ -112,25 +112,11 @@ export function SidebarContent({ user, mobile = false }: { user: User; mobile?: 
       <div className={`flex items-center h-14 border-b border-[var(--sidebar-border)] shrink-0 ${mobile ? "px-4 justify-start" : expanded ? "px-4 justify-between" : "px-1 justify-between"}`}>
         {expanded ? (
           <Link href="/dashboard" className="flex items-center py-1">
-            <Image
-              src="/logo-dark.png"
-              alt="ResourceHub"
-              width={140}
-              height={40}
-              className="h-8 w-auto object-contain"
-              priority
-            />
+            <Logo size={28} theme="dark" showSubtitle={false} />
           </Link>
         ) : (
-          <Link href="/dashboard" className="flex h-9 w-9 items-center justify-center rounded-lg overflow-hidden" title="ResourceHub Dashboard" aria-label="Dashboard">
-            <Image
-              src="/icon.png"
-              alt="ResourceHub"
-              width={32}
-              height={32}
-              className="h-7 w-7 object-contain rounded-md"
-              priority
-            />
+          <Link href="/dashboard" className="flex h-9 w-9 items-center justify-center rounded-lg hover:bg-white/5 transition-colors" title="ResourceHub Dashboard" aria-label="Dashboard">
+            <LogoIcon size={26} theme="dark" />
           </Link>
         )}
         {!mobile && (

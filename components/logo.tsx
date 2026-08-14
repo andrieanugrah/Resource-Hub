@@ -10,79 +10,80 @@ interface LogoProps extends React.SVGProps<SVGSVGElement> {
 
 export function LogoIcon({
   size = 32,
+  theme = "auto",
   className = "",
   ...props
-}: React.SVGProps<SVGSVGElement> & { size?: number | string }) {
+}: React.SVGProps<SVGSVGElement> & { size?: number | string; theme?: "dark" | "light" | "auto" }) {
+  const isDark = theme === "dark";
+
   return (
     <svg
       width={size}
       height={size}
-      viewBox="0 0 120 120"
+      viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={`shrink-0 ${className}`}
       {...props}
     >
       <defs>
-        <linearGradient id="rh-dark-grad" x1="20" y1="15" x2="60" y2="105" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#1E293B" />
-          <stop offset="100%" stopColor="#0F172A" />
-        </linearGradient>
-        <linearGradient id="rh-orange-grad" x1="60" y1="15" x2="105" y2="105" gradientUnits="userSpaceOnUse">
+        <linearGradient id="rh-orange-grad" x1="45" y1="10" x2="85" y2="90" gradientUnits="userSpaceOnUse">
           <stop offset="0%" stopColor="#FB923C" />
           <stop offset="50%" stopColor="#F97316" />
           <stop offset="100%" stopColor="#EA580C" />
         </linearGradient>
-        <linearGradient id="rh-orange-light" x1="60" y1="20" x2="90" y2="60" gradientUnits="userSpaceOnUse">
+        <linearGradient id="rh-orange-light" x1="45" y1="15" x2="65" y2="55" gradientUnits="userSpaceOnUse">
           <stop offset="0%" stopColor="#FDBA74" />
           <stop offset="100%" stopColor="#FB923C" />
         </linearGradient>
-        <linearGradient id="rh-orange-dark" x1="70" y1="60" x2="105" y2="105" gradientUnits="userSpaceOnUse">
+        <linearGradient id="rh-orange-dark" x1="65" y1="50" x2="90" y2="90" gradientUnits="userSpaceOnUse">
           <stop offset="0%" stopColor="#EA580C" />
           <stop offset="100%" stopColor="#C2410C" />
         </linearGradient>
+        <linearGradient id="rh-dark-r" x1="10" y1="10" x2="45" y2="90" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#1E293B" />
+          <stop offset="100%" stopColor="#0F172A" />
+        </linearGradient>
       </defs>
 
-      {/* R Monogram (Left - Dark Slate / Navy Facets) */}
-      <g id="letter-R">
-        {/* Main Vertical Spine of R */}
+      {/* Hexagonal Isometric Outline / Silhouette */}
+      <g>
+        {/* === R MONOGRAM (Left Face) === */}
+        {/* Left vertical column of R */}
         <path
-          d="M22 25 L40 15 L40 95 L22 105 Z"
-          fill="url(#rh-dark-grad)"
+          d="M12 24 L30 14 L30 86 L12 96 Z"
+          fill={isDark ? "#FFFFFF" : "url(#rh-dark-r)"}
         />
-        {/* Top Loop Outer */}
+        {/* Upper loop of R */}
         <path
-          d="M40 15 L60 25 L60 55 L40 65 Z"
-          fill="#1E293B"
+          d="M30 14 L46 23 L46 50 L30 59 Z"
+          fill={isDark ? "#E2E8F0" : "#334155"}
         />
-        {/* Inner Counter Hole for R */}
+        {/* Inner hole of R */}
         <path
-          d="M40 32 L50 37 L50 48 L40 53 Z"
-          fill="#0F172A"
-          opacity="0.9"
+          d="M30 28 L38 32 L38 42 L30 46 Z"
+          fill={isDark ? "#0F172A" : "#FFFFFF"}
         />
-        {/* Diagonal Leg of R */}
+        {/* Diagonal lower leg of R */}
         <path
-          d="M40 55 L58 64 L58 95 L40 85 Z"
-          fill="#334155"
+          d="M30 50 L46 59 L46 86 L30 77 Z"
+          fill={isDark ? "#CBD5E1" : "#1E293B"}
         />
-      </g>
 
-      {/* H Monogram (Right - Vibrant Orange / Amber Facets) */}
-      <g id="letter-H">
-        {/* Left Leg of H */}
+        {/* === H MONOGRAM (Right Face) === */}
+        {/* Left vertical column of H */}
         <path
-          d="M66 28 L80 20 L80 100 L66 108 Z"
+          d="M52 23 L66 15 L66 87 L52 95 Z"
           fill="url(#rh-orange-light)"
         />
-        {/* Crossbar of H (Isometric Angle) */}
+        {/* Isometric Crossbar of H */}
         <path
-          d="M80 52 L95 44 L95 62 L80 70 Z"
+          d="M66 45 L76 39 L76 55 L66 61 Z"
           fill="url(#rh-orange-grad)"
         />
-        {/* Right Leg of H */}
+        {/* Right vertical column of H */}
         <path
-          d="M95 20 L110 12 L110 92 L95 100 Z"
+          d="M76 15 L90 7 L90 79 L76 87 Z"
           fill="url(#rh-orange-dark)"
         />
       </g>
@@ -101,7 +102,7 @@ export function Logo({
   const iconSize = typeof size === "number" ? size : 32;
 
   if (variant === "icon") {
-    return <LogoIcon size={size} className={className} {...props} />;
+    return <LogoIcon size={size} theme={theme} className={className} {...props} />;
   }
 
   const textColor =
@@ -120,11 +121,11 @@ export function Logo({
 
   return (
     <div className={`inline-flex items-center gap-3 ${className}`}>
-      {variant !== "wordmark" && <LogoIcon size={iconSize} {...props} />}
-      <div className="flex flex-col leading-none">
+      {variant !== "wordmark" && <LogoIcon size={iconSize} theme={theme} {...props} />}
+      <div className="flex flex-col leading-none text-left">
         <div className="flex items-center tracking-tight font-extrabold text-xl">
           <span className={textColor}>Resource</span>
-          <span className="text-orange-500">Hub</span>
+          <span className="text-[#F97316]">Hub</span>
         </div>
         {showSubtitle && (
           <span

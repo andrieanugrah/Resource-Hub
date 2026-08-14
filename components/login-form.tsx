@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import { Loader2 } from "lucide-react";
 import { apiClient } from "@/app/api-client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { Logo, LogoIcon } from "@/components/logo";
 
 export function LoginForm({
   className,
@@ -51,6 +51,7 @@ export function LoginForm({
           <form onSubmit={handleSubmit} className="p-6 md:p-8">
             <FieldGroup>
               <div className="flex flex-col items-center gap-2 text-center">
+                <LogoIcon size={42} theme="light" className="mb-1" />
                 <h1 className="text-2xl font-bold">Welcome back</h1>
                 <p className="text-balance text-muted-foreground text-sm">
                   Login to ResourceHub
@@ -99,26 +100,38 @@ export function LoginForm({
             </FieldGroup>
           </form>
           <div className="relative hidden md:flex flex-col items-center justify-center p-8 bg-slate-900 text-white overflow-hidden">
-            {/* Ambient decorative grid & circles */}
-            <div className="absolute inset-0 bg-[radial-gradient(#ffffff0a_1px,transparent_1px)] [background-size:16px_16px] opacity-70" />
-            <div className="absolute -top-24 -right-24 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+            {/* Background grid */}
+            <svg className="absolute inset-0 h-full w-full opacity-20" viewBox="0 0 400 400">
+              <defs>
+                <pattern id="login-grid" width="32" height="32" patternUnits="userSpaceOnUse">
+                  <path d="M 32 0 L 0 0 0 32" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-slate-400" />
+                </pattern>
+              </defs>
+              <rect width="400" height="400" fill="url(#login-grid)" />
+              <circle cx="200" cy="180" r="110" fill="none" stroke="currentColor" strokeWidth="1" className="text-white/10" />
+              <circle cx="200" cy="180" r="75" fill="none" stroke="currentColor" strokeWidth="1" className="text-white/10" />
+              <circle cx="200" cy="180" r="40" fill="none" stroke="currentColor" strokeWidth="1" className="text-orange-500/20" />
+            </svg>
+
+            {/* Glowing ambient dots */}
+            <div className="absolute -top-20 -right-20 w-56 h-56 bg-orange-500/15 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-20 -left-20 w-56 h-56 bg-blue-600/15 rounded-full blur-3xl pointer-events-none" />
 
             <div className="relative flex flex-col items-center text-center z-10 space-y-4">
-              <Image
-                src="/logo-dark.png"
-                alt="ResourceHub"
-                width={200}
-                height={60}
-                className="h-12 w-auto object-contain drop-shadow-md"
-                priority
-              />
-              <div className="inline-block px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[11px] font-semibold tracking-[0.2em] text-slate-300 uppercase">
-                IT ASSET MANAGEMENT
+              <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 shadow-2xl backdrop-blur-sm">
+                <LogoIcon size={64} theme="dark" />
               </div>
-              <p className="text-xs text-slate-400 max-w-[220px] leading-relaxed pt-2">
+
+              <div className="flex flex-col items-center">
+                <Logo variant="wordmark" theme="dark" showSubtitle={false} />
+                <span className="text-[10px] font-bold tracking-[0.25em] text-slate-400 uppercase mt-1.5">
+                  IT ASSET MANAGEMENT
+                </span>
+              </div>
+
+              <div className="pt-2 text-xs text-slate-400/80 max-w-[240px] leading-relaxed">
                 Centralized hardware, software license, and lifecycle inventory control.
-              </p>
+              </div>
             </div>
           </div>
         </CardContent>
