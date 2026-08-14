@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Logo, LogoIcon } from "@/components/logo";
+import { LogoIcon } from "@/components/logo";
 
 export function LoginForm({
   className,

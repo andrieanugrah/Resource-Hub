@@ -5,21 +5,21 @@ import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { AnimatedCounter } from "@/components/animated-counter";
 import {
-  Package2,
-  CheckCircle2,
-  UserCheck,
+  Package,
+  CircleCheck,
+  UserRoundCheck,
   Wrench,
-  ClipboardList,
+  ClipboardClock,
   ShieldAlert,
   type LucideIcon,
 } from "lucide-react";
 
 const ICON_MAP: Record<string, LucideIcon> = {
-  package: Package2,
-  check: CheckCircle2,
-  "user-check": UserCheck,
+  package: Package,
+  check: CircleCheck,
+  "user-check": UserRoundCheck,
   wrench: Wrench,
-  clipboard: ClipboardList,
+  clipboard: ClipboardClock,
   shield: ShieldAlert,
 };
 
@@ -36,7 +36,7 @@ export function AnimatedKpiCards({ cards }: { cards: KpiCardData[] }) {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
       {cards.map((c, i) => {
-        const Icon = ICON_MAP[c.iconKey] ?? Package2;
+        const Icon = ICON_MAP[c.iconKey] ?? Package;
         return (
           <motion.div
             key={c.label}

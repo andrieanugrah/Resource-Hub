@@ -7,10 +7,10 @@ import { usePathname } from "next/navigation";
 import { Logo, LogoIcon } from "@/components/logo";
 import { apiClient } from "@/app/api-client";
 import {
-  LayoutDashboard, Package, Tags, MapPin, Key,
-  FileText, CheckCircle, Wrench, Users,
-  Building2, BarChart3, ScrollText, LifeBuoy,
-  LogOut, Plus, PanelLeft, ScanLine,
+  LayoutDashboard, Package, Tags, MapPin, KeyRound,
+  ClipboardList, CheckCircle, Wrench, Users,
+  Building2, ChartNoAxesCombined, ScrollText, CircleHelp,
+  Plus, PanelLeft, ScanLine,
 } from "lucide-react";
 import type { User } from "@/lib/db";
 import { can } from "@/lib/permissions";
@@ -43,13 +43,13 @@ const navSections: NavSection[] = [
       { href: "/scan", label: "Scan QR", icon: ScanLine },
       { href: "/categories", label: "Categories", icon: Tags, perm: "master.manage" },
       { href: "/locations", label: "Locations", icon: MapPin, perm: "master.manage" },
-      { href: "/licenses", label: "Software Licenses", icon: Key },
+      { href: "/licenses", label: "Software Licenses", icon: KeyRound },
     ],
   },
   {
     title: "Workflows",
     items: [
-      { href: "/requests", label: "Requests", icon: FileText },
+      { href: "/requests", label: "Requests", icon: ClipboardList },
       { href: "/approvals", label: "Approvals", icon: CheckCircle, perm: "request.approve" },
       { href: "/maintenance", label: "Maintenance", icon: Wrench, perm: "maintenance.view" },
     ],
@@ -64,14 +64,14 @@ const navSections: NavSection[] = [
   {
     title: "Insights",
     items: [
-      { href: "/reports", label: "Reports", icon: BarChart3, perm: "report.view_all" },
+      { href: "/reports", label: "Reports", icon: ChartNoAxesCombined, perm: "report.view_all" },
       { href: "/audit-logs", label: "Audit Trail", icon: ScrollText, perm: "audit.view" },
     ],
   },
   {
     title: "Help",
     items: [
-      { href: "/support", label: "Support", icon: LifeBuoy },
+      { href: "/support", label: "Support", icon: CircleHelp },
     ],
   },
 ];
@@ -79,13 +79,13 @@ const navSections: NavSection[] = [
 export function SidebarContent({ user, mobile = false }: { user: User; mobile?: boolean }) {
   const pathname = usePathname();
   const router = useRouter();
-  const [loggingOut, setLoggingOut] = useState(false);
+  const [_loggingOut, _setLoggingOut] = useState(false);
   const { state, toggle } = useSidebar();
   // Mobile sheet forces expanded layout; collapse control hidden in sheet.
   const expanded = mobile ? true : state === "expanded";
 
-  async function handleLogout() {
-    setLoggingOut(true);
+  async function _handleLogout() {
+    _setLoggingOut(true);
     try { await apiClient("/api/auth/logout", { method: "POST" }); } catch {}
     router.push("/login");
   }
@@ -199,7 +199,7 @@ export function SidebarContent({ user, mobile = false }: { user: User; mobile?: 
               href="/support"
               className="w-full flex items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-medium text-white/50 hover:bg-[var(--sidebar-accent)] hover:text-white/90 transition-colors"
             >
-              <LifeBuoy className="h-4 w-4 shrink-0 text-white/40" />
+              <CircleHelp className="h-4 w-4 shrink-0 text-white/40" />
               <span>Help & Support</span>
             </Link>
           </>
@@ -212,7 +212,7 @@ export function SidebarContent({ user, mobile = false }: { user: User; mobile?: 
               className="flex h-8 w-8 items-center justify-center rounded-lg text-white/40 hover:bg-[var(--sidebar-accent)] hover:text-white/80 transition-colors"
               aria-label="Help & Support"
             >
-              <LifeBuoy className="h-4 w-4 shrink-0" />
+              <CircleHelp className="h-4 w-4 shrink-0" />
             </Link>
           </div>
         )}

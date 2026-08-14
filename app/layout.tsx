@@ -10,12 +10,11 @@ export const metadata: Metadata = {
   description: "Enterprise IT Asset, Hardware & Inventory Management System",
   icons: {
     icon: [
-      { url: "/icon.png", sizes: "64x64", type: "image/png" },
-      { url: "/favicon.png", type: "image/png" },
       { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/brand/logo-mark.svg", type: "image/svg+xml" },
     ],
     apple: [
-      { url: "/app/apple-icon.png", sizes: "180x180", type: "image/png" },
+      { url: "/brand/favicon.svg", type: "image/svg+xml" },
     ],
   },
 };

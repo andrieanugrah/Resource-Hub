@@ -9,7 +9,7 @@ import { AnimatedKpiCards } from "@/components/animated-kpi-cards";
 import { AnimatedDepartmentBars } from "@/components/animated-department-bars";
 import { checkWarrantyExpirationNotifications, checkExpiredReservations } from "@/lib/notifications";
 import Link from "next/link";
-import { Package2, CheckCircle2, UserCheck, Wrench, ClipboardList, ShieldAlert, TrendingUp, Building2 } from "lucide-react";
+import { Package, CheckCircle2, UserCheck, Wrench, ClipboardList, ShieldAlert, TrendingUp, Building2 } from "lucide-react";
 
 const cardConfigs = [
   { label: "Total Assets", iconKey: "package", accent: "from-primary/20 to-primary/5", dot: "bg-primary", link: "/assets" },
@@ -91,7 +91,7 @@ export default async function DashboardPage() {
           </CardHeader>
           {recent.length === 0 ? (
             <CardContent className="flex flex-col items-center gap-2 py-10">
-              <Package2 className="h-8 w-8 text-muted-foreground/20" />
+              <Package className="h-8 w-8 text-muted-foreground/20" />
               <p className="text-sm font-medium text-muted-foreground">No activity recorded yet</p>
             </CardContent>
           ) : (

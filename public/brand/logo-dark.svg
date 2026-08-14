@@ -1,0 +1,31 @@
+<svg width="240" height="40" viewBox="0 0 240 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="rh-h-left-dark" x1="50" y1="10" x2="68" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#FB923C" />
+      <stop offset="100%" stopColor="#F97316" />
+    </linearGradient>
+    <linearGradient id="rh-h-right-dark" x1="68" y1="10" x2="95" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#F97316" />
+      <stop offset="100%" stopColor="#EA580C" />
+    </linearGradient>
+  </defs>
+
+  <!-- Monogram -->
+  <g transform="translate(0, 2) scale(0.31)">
+    <!-- R (White) -->
+    <path d="M8 30 L26 20 L26 85 L8 95 Z" fill="#FFFFFF" />
+    <path d="M26 20 L46 8 L46 50 L26 62 Z" fill="#D1D5DB" />
+    <path d="M28 32 L40 24 L40 44 L28 52 Z" fill="#111827" />
+    <path d="M26 62 L46 50 L46 100 L34 107 L26 85 Z" fill="#FFFFFF" />
+
+    <!-- H (Orange) -->
+    <path d="M54 20 L68 12 L68 100 L54 108 Z" fill="url(#rh-h-left-dark)" />
+    <path d="M68 48 L80 41 L80 63 L68 70 Z" fill="#F97316" />
+    <path d="M80 12 L94 4 L94 84 L80 92 Z" fill="url(#rh-h-right-dark)" />
+  </g>
+
+  <!-- Wordmark -->
+  <text x="42" y="27" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="22" letter-spacing="-0.03em">
+    <tspan fill="#FFFFFF">Resource</tspan><tspan fill="#F97316">Hub</tspan>
+  </text>
+</svg>

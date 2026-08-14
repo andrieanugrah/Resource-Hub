@@ -9,6 +9,8 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
+import { Logo } from "@/components/logo";
+
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -38,6 +40,9 @@ export default function ForgotPasswordPage() {
   if (sent) {
     return (
       <div className="flex min-h-svh flex-col items-center justify-center bg-muted/30 p-6">
+        <div className="mb-6">
+          <Logo size={32} />
+        </div>
         <Card className="w-full max-w-sm rounded-2xl border-0 shadow-(--shadow-card)">
           <CardHeader className="text-center pb-2">
             <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-emerald-50 ring-1 ring-emerald-200 mb-3">
@@ -64,6 +69,9 @@ export default function ForgotPasswordPage() {
 
   return (
     <div className="flex min-h-svh flex-col items-center justify-center bg-muted/30 p-6">
+      <div className="mb-6">
+        <Logo size={32} />
+      </div>
       <Card className="w-full max-w-sm rounded-2xl border-0 shadow-(--shadow-card)">
         <CardHeader className="text-center">
           <CardTitle>Forgot Password</CardTitle>

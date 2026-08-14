@@ -19,14 +19,14 @@ export function LogoIcon({
   ...props
 }: React.SVGProps<SVGSVGElement> & { size?: number | string; theme?: "dark" | "light" | "auto" }) {
   const isDark = theme === "dark";
-  const rColor = isDark ? "#FFFFFF" : "#0F172A";
-  const rFacetColor = isDark ? "#E2E8F0" : "#1E293B";
+  const rColor = isDark ? "#FFFFFF" : "#111827";
+  const rFacetColor = isDark ? "#D1D5DB" : "#1F2937";
 
   return (
     <svg
       width={size}
       height={size}
-      viewBox="0 0 100 115"
+      viewBox="0 0 100 112"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={`shrink-0 ${className}`}
@@ -45,24 +45,24 @@ export function LogoIcon({
 
       {/* === LEFT HALF: 'R' (Hexagon Left Facet) === */}
       <g id="rh-monogram-R">
-        {/* R Left Vertical Spine */}
+        {/* R Left Vertical Spine (front face) */}
         <path
-          d="M8 30 L26 19 L26 82 L8 93 Z"
+          d="M8 30 L26 20 L26 85 L8 95 Z"
           fill={rColor}
         />
-        {/* R Top Loop Outer */}
+        {/* R Bowl / Top Loop (side face — lighter shade for 3D depth) */}
         <path
-          d="M26 19 L46 7 L46 45 L26 57 Z"
+          d="M26 20 L46 8 L46 50 L26 62 Z"
           fill={rFacetColor}
         />
-        {/* R Inner Counter Hole (Negative Space) */}
+        {/* R Inner Counter Hole (negative space — must read clearly as 'R') */}
         <path
-          d="M26 31 L36 25 L36 39 L26 45 Z"
-          fill={isDark ? "#0B1120" : "#FFFFFF"}
+          d="M28 32 L40 24 L40 44 L28 52 Z"
+          fill={isDark ? "#111827" : "#FFFFFF"}
         />
-        {/* R Diagonal Leg (Bottom Right) */}
+        {/* R Diagonal Leg (front face) */}
         <path
-          d="M26 57 L46 45 L46 95 L34 102 L26 82 Z"
+          d="M26 62 L46 50 L46 100 L34 107 L26 85 Z"
           fill={rColor}
         />
       </g>
@@ -71,17 +71,17 @@ export function LogoIcon({
       <g id="rh-monogram-H">
         {/* H Left Column */}
         <path
-          d="M54 20 L68 12 L68 98 L54 106 Z"
+          d="M54 20 L68 12 L68 100 L54 108 Z"
           fill="url(#rh-h-left)"
         />
         {/* H Isometric Crossbar */}
         <path
-          d="M68 47 L80 40 L80 62 L68 69 Z"
+          d="M68 48 L80 41 L80 63 L68 70 Z"
           fill="#F97316"
         />
         {/* H Right Column */}
         <path
-          d="M80 12 L94 4 L94 82 L80 90 Z"
+          d="M80 12 L94 4 L94 84 L80 92 Z"
           fill="url(#rh-h-right)"
         />
       </g>
@@ -107,8 +107,8 @@ export function Logo({
     theme === "dark"
       ? "text-white"
       : theme === "light"
-      ? "text-slate-900"
-      : "text-slate-900 dark:text-white";
+      ? "text-[#111827]"
+      : "text-[#111827] dark:text-white";
 
   const subtextColor =
     theme === "dark"

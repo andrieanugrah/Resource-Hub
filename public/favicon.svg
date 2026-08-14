@@ -1,25 +1,27 @@
 <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="fav-h-left" x1="32" y1="10" x2="45" y2="55" gradientUnits="userSpaceOnUse">
+    <linearGradient id="fav-h-left-root" x1="32" y1="10" x2="45" y2="55" gradientUnits="userSpaceOnUse">
       <stop offset="0%" stopColor="#FB923C" />
       <stop offset="100%" stopColor="#F97316" />
     </linearGradient>
-    <linearGradient id="fav-h-right" x1="45" y1="10" x2="60" y2="55" gradientUnits="userSpaceOnUse">
+    <linearGradient id="fav-h-right-root" x1="45" y1="10" x2="60" y2="55" gradientUnits="userSpaceOnUse">
       <stop offset="0%" stopColor="#F97316" />
       <stop offset="100%" stopColor="#EA580C" />
     </linearGradient>
   </defs>
 
-  <rect width="64" height="64" rx="14" fill="#0B1120" />
-  
-  <g transform="translate(6, 6) scale(0.52)">
-    <path d="M8 30 L26 19 L26 82 L8 93 Z" fill="#FFFFFF" />
-    <path d="M26 19 L46 7 L46 45 L26 57 Z" fill="#E2E8F0" />
-    <path d="M26 31 L36 25 L36 39 L26 45 Z" fill="#0B1120" />
-    <path d="M26 57 L46 45 L46 95 L34 102 L26 82 Z" fill="#FFFFFF" />
+  <rect width="64" height="64" rx="14" fill="#111827" />
 
-    <path d="M54 20 L68 12 L68 98 L54 106 Z" fill="url(#fav-h-left)" />
-    <path d="M68 47 L80 40 L80 62 L68 69 Z" fill="#F97316" />
-    <path d="M80 12 L94 4 L94 82 L80 90 Z" fill="url(#fav-h-right)" />
+  <g transform="translate(6, 5) scale(0.52)">
+    <!-- R Monogram (Left) -->
+    <path d="M8 30 L26 20 L26 85 L8 95 Z" fill="#FFFFFF" />
+    <path d="M26 20 L46 8 L46 50 L26 62 Z" fill="#D1D5DB" />
+    <path d="M28 32 L40 24 L40 44 L28 52 Z" fill="#111827" />
+    <path d="M26 62 L46 50 L46 100 L34 107 L26 85 Z" fill="#FFFFFF" />
+
+    <!-- H Monogram (Right) -->
+    <path d="M54 20 L68 12 L68 100 L54 108 Z" fill="url(#fav-h-left-root)" />
+    <path d="M68 48 L80 41 L80 63 L68 70 Z" fill="#F97316" />
+    <path d="M80 12 L94 4 L94 84 L80 92 Z" fill="url(#fav-h-right-root)" />
   </g>
 </svg>
